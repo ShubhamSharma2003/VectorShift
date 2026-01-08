@@ -1,5 +1,3 @@
-// llmNode.js
-
 import { BaseNode } from './BaseNode';
 
 export const LLMNode = ({ id, data }) => {
@@ -10,8 +8,8 @@ export const LLMNode = ({ id, data }) => {
   const rightHandles = [{ id: `${id}-response`, type: 'source' }];
 
   return (
-    <BaseNode id={id} title="LLM" leftHandles={leftHandles} rightHandles={rightHandles} className="llm-node">
-      <div>This is a LLM node.</div>
+    <BaseNode id={id} title="LLM" leftHandles={leftHandles} rightHandles={rightHandles} className="vs-node--llm">
+      <div className="vs-node__description">This is a LLM node.</div>
     </BaseNode>
   );
 }

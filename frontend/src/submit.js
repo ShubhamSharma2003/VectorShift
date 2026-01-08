@@ -1,5 +1,3 @@
-// submit.js
-
 import { useStore } from './store';
 import './index.css';
 
@@ -23,8 +21,8 @@ export const SubmitButton = () => {
     };
 
     return (
-        <div className="submit-container">
-            <button type="button" className="submit-button" onClick={handleSubmit}>
+        <div className="vs-submit">
+            <button type="button" className="vs-submit__button" onClick={handleSubmit}>
                 Submit Pipeline
             </button>
         </div>

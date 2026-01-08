@@ -1,5 +1,3 @@
-// draggableNode.js
-
 export const DraggableNode = ({ type, label }) => {
     const onDragStart = (event, nodeType) => {
       const appData = { nodeType }
@@ -10,13 +8,12 @@ export const DraggableNode = ({ type, label }) => {
   
     return (
       <div
-        className={`draggable-node ${type}`}
+        className={`vs-draggable-node vs-draggable-node--${type}`}
         onDragStart={(event) => onDragStart(event, type)}
         onDragEnd={(event) => (event.target.style.cursor = 'grab')}
         draggable
       >
-          <span>{label}</span>
+          <span className="vs-draggable-node__label">{label}</span>
       </div>
     );
   };
-  

@@ -1,5 +1,3 @@
-// textNode.js
-
 import { useEffect, useRef, useState } from 'react';
 import { BaseNode } from './BaseNode';
 
@@ -12,7 +10,6 @@ export const TextNode = ({ id, data }) => {
   const measurer = useRef(null);
 
   useEffect(() => {
-    // compute variables
     const found = new Set();
     let m;
     while ((m = VAR_RE.exec(currText)) !== null) {
@@ -20,7 +17,6 @@ export const TextNode = ({ id, data }) => {
     }
     setVars(Array.from(found));
 
-    // measure size using hidden element
     if (measurer.current) {
       measurer.current.textContent = currText || ' ';
       const rect = measurer.current.getBoundingClientRect();
@@ -35,9 +31,9 @@ export const TextNode = ({ id, data }) => {
 
   return (
     <>
-      <BaseNode id={id} title="Text" leftHandles={leftHandles} rightHandles={rightHandles} className="text-node">
-        <div style={{ width: size.width }}>
-          <textarea value={currText} onChange={handleTextChange} style={{ width: '100%', height: size.height, resize: 'none' }} />
+      <BaseNode id={id} title="Text" leftHandles={leftHandles} rightHandles={rightHandles} className="vs-node--text">
+        <div className="vs-node__text-wrapper" style={{ width: size.width }}>
+          <textarea className="vs-field__textarea vs-field__textarea--text-node" value={currText} onChange={handleTextChange} style={{ width: '100%', height: size.height, resize: 'none' }} />
         </div>
       </BaseNode>
 

@@ -16,9 +16,9 @@ export const BaseNode = ({ id, title, children, leftHandles = [], rightHandles =
         />
       ))}
 
-      <div className="vs-node-header">{title}</div>
+      <div className="vs-node__header">{title}</div>
 
-      <div className="vs-node-body">{children}</div>
+      <div className="vs-node__body">{children}</div>
 
       {/* right handles */}
       {rightHandles.map((h, idx) => (

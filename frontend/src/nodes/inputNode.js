@@ -1,5 +1,3 @@
-// inputNode.js
-
 import { useState } from 'react';
 import { BaseNode } from './BaseNode';
 
@@ -13,14 +11,14 @@ export const InputNode = ({ id, data }) => {
   const rightHandles = [{ id: `${id}-value`, type: 'source' }];
 
   return (
-    <BaseNode id={id} title="Input" rightHandles={rightHandles} className="input-node">
+    <BaseNode id={id} title="Input" rightHandles={rightHandles} className="vs-node--input">
       <div className="vs-field">
-        <label>Name</label>
-        <input type="text" value={currName} onChange={handleNameChange} />
+        <label className="vs-field__label">Name</label>
+        <input className="vs-field__input" type="text" value={currName} onChange={handleNameChange} />
       </div>
       <div className="vs-field">
-        <label>Type</label>
-        <select value={inputType} onChange={handleTypeChange}>
+        <label className="vs-field__label">Type</label>
+        <select className="vs-field__select" value={inputType} onChange={handleTypeChange}>
           <option value="Text">Text</option>
           <option value="File">File</option>
         </select>

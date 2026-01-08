@@ -1,6 +1,65 @@
-/* ============================================
-   SUBMIT BUTTON
-   ============================================ */
+.vs-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.6), rgba(11, 18, 32, 0.4));
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+  z-index: 10;
+}
+
+.vs-submit__button {
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.9), rgba(139, 92, 246, 0.9));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 12px 32px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 16px rgba(124, 58, 237, 0.4),
+              inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+}
+
+.vs-submit__button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.vs-submit__button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(124, 58, 237, 0.5),
+              inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  background: linear-gradient(135deg, rgba(124, 58, 237, 1), rgba(139, 92, 246, 1));
+}
+
+.vs-submit__button:hover::before {
+  opacity: 1;
+}
+
+.vs-submit__button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.4);
+}
+
+.vs-submit__button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
 .submit-container {
   display: flex;
   align-items: center;
@@ -30,95 +89,4 @@
   text-transform: uppercase;
   position: relative;
   overflow: hidden;
-}
-
-.submit-button::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.submit-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(124, 58, 237, 0.5),
-              inset 0 1px 0 rgba(255, 255, 255, 0.3);
-  background: linear-gradient(135deg, rgba(124, 58, 237, 1), rgba(139, 92, 246, 1));
-}
-
-.submit-button:hover::before {
-  opacity: 1;
-}
-
-.submit-button:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.4);
-}
-
-.submit-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  transform: none;
-}
-
-/* ============================================
-   PLAY BUTTON OVERLAY (if used)
-   ============================================ */
-.play-overlay {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2000;
-  pointer-events: none;
-}
-
-.play-button {
-  pointer-events: auto;
-  width: 120px;
-  height: 120px;
-  border-radius: 999px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 8px 40px rgba(124, 58, 237, 0.3), 
-              0 0 60px rgba(124, 58, 237, 0.2),
-              inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: all 0.3s ease;
-}
-
-.play-button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 12px 50px rgba(124, 58, 237, 0.4), 
-              0 0 80px rgba(124, 58, 237, 0.3),
-              inset 0 1px 0 rgba(255, 255, 255, 0.15);
-}
-
-.play-button .rings {
-  position: absolute;
-  inset: -18px;
-  border-radius: 999px;
-  filter: blur(8px);
-}
-
-.play-button .ring {
-  position: absolute;
-  inset: 0;
-  border-radius: 999px;
-  border: 2px dashed rgba(124, 58, 237, 0.3);
-}
-
-.play-icon {
-  width: 48px;
-  height: 48px;
-  background: linear-gradient(90deg, #fff, #d1b8ff);
-  clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
-  box-shadow: 0 6px 30px rgba(124, 58, 237, 0.5);
 }

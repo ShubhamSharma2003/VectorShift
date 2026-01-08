@@ -7,10 +7,10 @@ export const FilterNode = ({ id }) => {
   const rightHandles = [{ id: `${id}-out` }];
 
   return (
-    <BaseNode id={id} title="Filter" leftHandles={leftHandles} rightHandles={rightHandles} className="small-node filter-node">
+    <BaseNode id={id} title="Filter" leftHandles={leftHandles} rightHandles={rightHandles} className="vs-node--small vs-node--filter">
       <div className="vs-field">
-        <label>Condition</label>
-        <input value={cond} onChange={(e) => setCond(e.target.value)} />
+        <label className="vs-field__label">Condition</label>
+        <input className="vs-field__input" value={cond} onChange={(e) => setCond(e.target.value)} />
       </div>
     </BaseNode>
   );

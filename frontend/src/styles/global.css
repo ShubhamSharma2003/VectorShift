@@ -1,6 +1,3 @@
-/* ============================================
-   GLOBAL STYLES & RESET
-   ============================================ */
 * {
   box-sizing: border-box;
 }
@@ -19,9 +16,6 @@ code {
     monospace;
 }
 
-/* ============================================
-   LAYOUT & BACKGROUND
-   ============================================ */
 html, body, #root {
   height: 100%;
   overflow: hidden;
@@ -35,7 +29,6 @@ body {
   color: #e6eef8;
 }
 
-/* Subtle stars overlay */
 body::before {
   content: '';
   position: fixed;
@@ -48,7 +41,6 @@ body::before {
   z-index: 0;
 }
 
-/* Nebula glow */
 body::after {
   content: '';
   position: fixed;
@@ -61,8 +53,7 @@ body::after {
   z-index: 0;
 }
 
-/* App Container */
-.app-container {
+.vs-app {
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -70,9 +61,6 @@ body::after {
   z-index: 1;
 }
 
-/* ============================================
-   SCROLLBAR STYLING
-   ============================================ */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;

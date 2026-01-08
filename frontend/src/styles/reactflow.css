@@ -1,6 +1,10 @@
-/* ============================================
-   REACT FLOW STYLING
-   ============================================ */
+.vs-reactflow-wrapper {
+  position: relative;
+  flex: 1;
+  height: 100%;
+  background: transparent;
+}
+
 .reactflow-wrapper {
   position: relative;
   flex: 1;
@@ -8,7 +12,6 @@
   background: transparent;
 }
 
-/* React Flow Background */
 .react-flow__background {
   opacity: 0.3;
 }
@@ -17,7 +20,6 @@
   stroke: rgba(124, 58, 237, 0.15);
 }
 
-/* React Flow Controls */
 .react-flow__controls {
   background: linear-gradient(180deg, rgba(15, 23, 42, 0.9), rgba(11, 18, 32, 0.8));
   backdrop-filter: blur(12px) saturate(180%);
@@ -78,7 +80,6 @@
   filter: drop-shadow(0 2px 4px rgba(124, 58, 237, 0.4));
 }
 
-/* React Flow MiniMap */
 .react-flow__minimap {
   background: linear-gradient(180deg, rgba(15, 23, 42, 0.9), rgba(11, 18, 32, 0.8));
   backdrop-filter: blur(12px) saturate(180%);
@@ -94,7 +95,6 @@
   stroke: rgba(124, 58, 237, 0.5);
 }
 
-/* React Flow Handles */
 .react-flow__handle {
   width: 14px;
   height: 14px;
@@ -123,7 +123,6 @@
   box-shadow: 0 0 16px rgba(16, 185, 129, 0.9);
 }
 
-/* React Flow Edges */
 .react-flow__edge-path {
   stroke: rgba(124, 58, 237, 0.6);
   stroke-width: 2;

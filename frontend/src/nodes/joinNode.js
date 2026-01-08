@@ -7,10 +7,10 @@ export const JoinNode = ({ id }) => {
   const rightHandles = [{ id: `${id}-joined` }];
 
   return (
-    <BaseNode id={id} title="Join" leftHandles={leftHandles} rightHandles={rightHandles} className="small-node join-node">
+    <BaseNode id={id} title="Join" leftHandles={leftHandles} rightHandles={rightHandles} className="vs-node--small vs-node--join">
       <div className="vs-field">
-        <label>Separator</label>
-        <input value={sep} onChange={(e) => setSep(e.target.value)} />
+        <label className="vs-field__label">Separator</label>
+        <input className="vs-field__input" value={sep} onChange={(e) => setSep(e.target.value)} />
       </div>
     </BaseNode>
   );

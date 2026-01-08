@@ -1,6 +1,3 @@
-/* ============================================
-   FORM FIELDS
-   ============================================ */
 .vs-field {
   display: flex;
   flex-direction: column;
@@ -12,6 +9,14 @@
   margin-bottom: 0;
 }
 
+.vs-field__label {
+  color: rgba(230, 238, 248, 0.85);
+  font-size: 12px;
+  font-weight: 500;
+  margin-bottom: 4px;
+  letter-spacing: 0.3px;
+}
+
 .vs-field label {
   color: rgba(230, 238, 248, 0.85);
   font-size: 12px;
@@ -20,6 +25,9 @@
   letter-spacing: 0.3px;
 }
 
+.vs-field__input,
+.vs-field__select,
+.vs-field__textarea,
 .vs-field input,
 .vs-field select,
 .vs-field textarea {
@@ -34,6 +42,9 @@
   outline: none;
 }
 
+.vs-field__input:focus,
+.vs-field__select:focus,
+.vs-field__textarea:focus,
 .vs-field input:focus,
 .vs-field select:focus,
 .vs-field textarea:focus {
@@ -42,6 +53,9 @@
   box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1), inset 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
+.vs-field__input:hover,
+.vs-field__select:hover,
+.vs-field__textarea:hover,
 .vs-field input:hover,
 .vs-field select:hover,
 .vs-field textarea:hover {
@@ -49,12 +63,14 @@
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.03));
 }
 
+.vs-field__textarea,
 .vs-field textarea {
   resize: vertical;
   min-height: 60px;
   line-height: 1.5;
 }
 
+.vs-field__select,
 .vs-field select {
   cursor: pointer;
   appearance: none;
@@ -64,28 +80,33 @@
   padding-right: 32px;
 }
 
+.vs-field__textarea--text-node,
+.vs-node--text .vs-field__textarea,
 .text-node textarea {
   font-family: inherit;
   background: rgba(0, 0, 0, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Placeholder styling for textareas in node body */
+.vs-node__body textarea::placeholder,
 .vs-node-body textarea::placeholder {
   color: rgba(255, 255, 255, 0.6);
   opacity: 1;
 }
 
+.vs-node__body textarea::-webkit-input-placeholder,
 .vs-node-body textarea::-webkit-input-placeholder {
   color: rgba(255, 255, 255, 0.6);
   opacity: 1;
 }
 
+.vs-node__body textarea::-moz-placeholder,
 .vs-node-body textarea::-moz-placeholder {
   color: rgba(255, 255, 255, 0.6);
   opacity: 1;
 }
 
+.vs-node__body textarea:-ms-input-placeholder,
 .vs-node-body textarea:-ms-input-placeholder {
   color: rgba(255, 255, 255, 0.6);
   opacity: 1;

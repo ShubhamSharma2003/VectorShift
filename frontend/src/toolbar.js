@@ -1,13 +1,11 @@
-// toolbar.js
-
 import { DraggableNode } from './draggableNode';
 import './index.css';
 
 export const PipelineToolbar = () => {
     return (
-        <div className="pipeline-toolbar">
-            <div className="toolbar-title">Node Palette</div>
-            <div className="toolbar-nodes">
+        <div className="vs-toolbar">
+            <div className="vs-toolbar__title">Node Palette</div>
+            <div className="vs-toolbar__nodes">
                 <DraggableNode type='customInput' label='Input' />
                 <DraggableNode type='llm' label='LLM' />
                 <DraggableNode type='customOutput' label='Output' />

@@ -1,23 +1,6 @@
-/* ============================================
-   MAIN STYLESHEET - IMPORTS ALL COMPONENT STYLES
-   ============================================ */
-
-/* Global styles (reset, layout, background, scrollbar) */
 @import './styles/global.css';
-
-/* Toolbar and draggable nodes */
 @import './styles/toolbar.css';
-
-/* Node components */
 @import './styles/nodes.css';
-
-/* Form fields and inputs */
 @import './styles/forms.css';
-
-/* ReactFlow components */
 @import './styles/reactflow.css';
-
-/* Other components (submit button, play button) */
 @import './styles/components.css';
-
-
