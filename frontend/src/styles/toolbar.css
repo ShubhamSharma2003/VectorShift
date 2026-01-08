@@ -1,0 +1,128 @@
+/* ============================================
+   TOOLBAR STYLING
+   ============================================ */
+.pipeline-toolbar {
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.8), rgba(11, 18, 32, 0.6));
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 16px 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 10;
+}
+
+.pipeline-toolbar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(124, 58, 237, 0.05), transparent);
+  pointer-events: none;
+}
+
+.toolbar-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(230, 238, 248, 0.6);
+  margin-bottom: 12px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.toolbar-nodes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* Draggable Node Cards */
+.draggable-node {
+  cursor: grab;
+  min-width: 100px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+  backdrop-filter: blur(8px) saturate(150%);
+  -webkit-backdrop-filter: blur(8px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  padding: 12px 16px;
+}
+
+.draggable-node::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.1), transparent);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.draggable-node:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(124, 58, 237, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border-color: rgba(124, 58, 237, 0.3);
+}
+
+.draggable-node:hover::before {
+  opacity: 1;
+}
+
+.draggable-node:active {
+  cursor: grabbing;
+  transform: translateY(0);
+}
+
+.draggable-node span {
+  color: #f8fbff;
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.3px;
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+/* Node Type Specific Colors */
+.draggable-node.customInput {
+  border-left: 3px solid rgba(34, 197, 94, 0.6);
+}
+
+.draggable-node.llm {
+  border-left: 3px solid rgba(168, 85, 247, 0.6);
+}
+
+.draggable-node.customOutput {
+  border-left: 3px solid rgba(59, 130, 246, 0.6);
+}
+
+.draggable-node.text {
+  border-left: 3px solid rgba(251, 191, 36, 0.6);
+}
+
+.draggable-node.date {
+  border-left: 3px solid rgba(236, 72, 153, 0.6);
+}
+
+.draggable-node.math {
+  border-left: 3px solid rgba(14, 165, 233, 0.6);
+}
+
+.draggable-node.join {
+  border-left: 3px solid rgba(139, 92, 246, 0.6);
+}
+
+.draggable-node.filter {
+  border-left: 3px solid rgba(245, 101, 101, 0.6);
+}
+
+.draggable-node.random {
+  border-left: 3px solid rgba(16, 185, 129, 0.6);
+}
