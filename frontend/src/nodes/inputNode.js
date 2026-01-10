@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { BaseNode } from './BaseNode';
+import { CustomSelect } from '../components/CustomSelect';
 
 export const InputNode = ({ id, data }) => {
   const [currName, setCurrName] = useState(data?.inputName ?? id.replace('customInput-', 'input_'));
@@ -8,10 +9,11 @@ export const InputNode = ({ id, data }) => {
   const handleNameChange = (e) => {
     setCurrName(e.target.value);
   };
-  
-  const handleTypeChange = (e) => {
-    setInputType(e.target.value);
-  };
+
+  const typeOptions = [
+    { value: 'Text', label: 'Text' },
+    { value: 'File', label: 'File' }
+  ];
 
   const rightHandles = [{ id: `${id}-value`, type: 'source' }];
 
@@ -28,14 +30,11 @@ export const InputNode = ({ id, data }) => {
       </div>
       <div className="vs-field">
         <label className="vs-field__label">Type</label>
-        <select 
-          className="vs-field__select" 
-          value={inputType} 
-          onChange={handleTypeChange}
-        >
-          <option value="Text">Text</option>
-          <option value="File">File</option>
-        </select>
+        <CustomSelect
+          value={inputType}
+          onChange={setInputType}
+          options={typeOptions}
+        />
       </div>
     </BaseNode>
   );

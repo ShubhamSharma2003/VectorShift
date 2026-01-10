@@ -1,12 +1,17 @@
 import { useState } from 'react';
 import { BaseNode } from './BaseNode';
+import { CustomSelect } from '../components/CustomSelect';
 
 export const OutputNode = ({ id, data }) => {
   const [currName, setCurrName] = useState(data?.outputName ?? id.replace('customOutput-', 'output_'));
   const [outputType, setOutputType] = useState(data?.outputType ?? 'Text');
 
   const handleNameChange = (e) => setCurrName(e.target.value);
-  const handleTypeChange = (e) => setOutputType(e.target.value);
+
+  const typeOptions = [
+    { value: 'Text', label: 'Text' },
+    { value: 'File', label: 'Image' }
+  ];
 
   const leftHandles = [{ id: `${id}-value`, type: 'target' }];
 
@@ -18,10 +23,11 @@ export const OutputNode = ({ id, data }) => {
       </div>
       <div className="vs-field">
         <label className="vs-field__label">Type</label>
-        <select className="vs-field__select" value={outputType} onChange={handleTypeChange}>
-          <option value="Text">Text</option>
-          <option value="File">Image</option>
-        </select>
+        <CustomSelect
+          value={outputType}
+          onChange={setOutputType}
+          options={typeOptions}
+        />
       </div>
     </BaseNode>
   );
