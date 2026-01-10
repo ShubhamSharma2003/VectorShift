@@ -4,7 +4,7 @@ import { BaseNode } from './BaseNode';
 // regex for finding template variables like {{var}}
 const VAR_RE = /\{\{\s*([a-zA-Z_$][\w$]*)\s*\}\}/g;
 
-export const TextNode = ({ id, data }) => {
+export const TextNode = ({ id, data, selected }) => {
   const [currText, setCurrText] = useState(data?.text ?? '{{input}}');
   const [size, setSize] = useState({ width: 220, height: 80 });
   const [vars, setVars] = useState([]);
@@ -47,7 +47,7 @@ export const TextNode = ({ id, data }) => {
 
   return (
     <>
-      <BaseNode id={id} title="Text" leftHandles={leftHandles} rightHandles={rightHandles} className="vs-node--text">
+      <BaseNode id={id} title="Text" leftHandles={leftHandles} rightHandles={rightHandles} className="vs-node--text" selected={selected}>
         <div className="vs-node__text-wrapper" style={{ width: size.width }}>
           <textarea 
             className="vs-field__textarea vs-field__textarea--text-node" 

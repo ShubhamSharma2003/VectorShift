@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { BaseNode } from './BaseNode';
 import { CustomSelect } from '../components/CustomSelect';
 
-export const InputNode = ({ id, data }) => {
+export const InputNode = ({ id, data, selected }) => {
   const [currName, setCurrName] = useState(data?.inputName ?? id.replace('customInput-', 'input_'));
   const [inputType, setInputType] = useState(data?.inputType ?? 'Text');
 
@@ -18,7 +18,7 @@ export const InputNode = ({ id, data }) => {
   const rightHandles = [{ id: `${id}-value`, type: 'source' }];
 
   return (
-    <BaseNode id={id} title="Input" rightHandles={rightHandles} className="vs-node--input">
+    <BaseNode id={id} title="Input" rightHandles={rightHandles} className="vs-node--input" selected={selected}>
       <div className="vs-field">
         <label className="vs-field__label">Name</label>
         <input 

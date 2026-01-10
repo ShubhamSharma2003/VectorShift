@@ -23,6 +23,42 @@
   border-color: rgba(124, 58, 237, 0.2);
 }
 
+.vs-node--selected {
+  box-shadow: 0 16px 48px rgba(80, 24, 120, 0.7), 
+              inset 0 1px 0 rgba(255,255,255,0.1),
+              0 0 0 2px rgba(124, 58, 237, 0.5) !important;
+  border-color: rgba(124, 58, 237, 0.4);
+}
+
+.vs-node__delete {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.4);
+  z-index: 10;
+}
+
+.vs-node__delete:hover {
+  transform: scale(1.15);
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.6);
+}
+
+.vs-node__delete:active {
+  transform: scale(0.95);
+}
+
 .vs-node__header {
   font-weight: 700;
   letter-spacing: 0.6px;

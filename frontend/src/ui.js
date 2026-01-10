@@ -138,9 +138,11 @@ export const PipelineUI = () => {
                 proOptions={proOptions}
                 snapGrid={[gridSize, gridSize]}
                 connectionLineType='smoothstep'
+                deleteKeyCode={['Backspace', 'Delete']}
+                multiSelectionKeyCode="Shift"
             >
                 <Background color="rgba(124, 58, 237, 0.15)" gap={gridSize} />
-                <Controls />
+                <Controls showInteractive={false} />
                 <MiniMap />
             </ReactFlow>
         </div>

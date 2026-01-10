@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { BaseNode } from './BaseNode';
 
-export const FilterNode = ({ id, data }) => {
+export const FilterNode = ({ id, data, selected }) => {
   const [cond, setCond] = useState(data?.condition ?? 'item => true');
   const leftHandles = [{ id: `${id}-in` }];
   const rightHandles = [{ id: `${id}-out` }];
@@ -13,6 +13,7 @@ export const FilterNode = ({ id, data }) => {
       leftHandles={leftHandles} 
       rightHandles={rightHandles} 
       className="vs-node--small vs-node--filter"
+      selected={selected}
     >
       <div className="vs-field">
         <label className="vs-field__label">Condition</label>
