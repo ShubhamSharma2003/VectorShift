@@ -2,11 +2,18 @@ import { useState } from 'react';
 import { BaseNode } from './BaseNode';
 
 export const InputNode = ({ id, data }) => {
-  const [currName, setCurrName] = useState(data?.inputName || id.replace('customInput-', 'input_'));
-  const [inputType, setInputType] = useState(data.inputType || 'Text');
+  // generate default name from id if not provided
+  const defaultName = id.replace('customInput-', 'input_');
+  const [currName, setCurrName] = useState(data?.inputName || defaultName);
+  const [inputType, setInputType] = useState(data?.inputType || 'Text');
 
-  const handleNameChange = (e) => setCurrName(e.target.value);
-  const handleTypeChange = (e) => setInputType(e.target.value);
+  const handleNameChange = (e) => {
+    setCurrName(e.target.value);
+  };
+  
+  const handleTypeChange = (e) => {
+    setInputType(e.target.value);
+  };
 
   const rightHandles = [{ id: `${id}-value`, type: 'source' }];
 
@@ -14,11 +21,20 @@ export const InputNode = ({ id, data }) => {
     <BaseNode id={id} title="Input" rightHandles={rightHandles} className="vs-node--input">
       <div className="vs-field">
         <label className="vs-field__label">Name</label>
-        <input className="vs-field__input" type="text" value={currName} onChange={handleNameChange} />
+        <input 
+          className="vs-field__input" 
+          type="text" 
+          value={currName} 
+          onChange={handleNameChange} 
+        />
       </div>
       <div className="vs-field">
         <label className="vs-field__label">Type</label>
-        <select className="vs-field__select" value={inputType} onChange={handleTypeChange}>
+        <select 
+          className="vs-field__select" 
+          value={inputType} 
+          onChange={handleTypeChange}
+        >
           <option value="Text">Text</option>
           <option value="File">File</option>
         </select>
@@ -26,3 +42,5 @@ export const InputNode = ({ id, data }) => {
     </BaseNode>
   );
 }
+
+export default InputNode;
