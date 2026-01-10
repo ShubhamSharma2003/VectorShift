@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import { BaseNode } from './BaseNode';
 
-export const FilterNode = ({ id }) => {
-  // default condition - accepts everything
-  const [cond, setCond] = useState('item => true');
+export const FilterNode = ({ id, data }) => {
+  const [cond, setCond] = useState(data?.condition ?? 'item => true');
   const leftHandles = [{ id: `${id}-in` }];
   const rightHandles = [{ id: `${id}-out` }];
 

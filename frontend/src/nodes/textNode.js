@@ -5,13 +5,12 @@ import { BaseNode } from './BaseNode';
 const VAR_RE = /\{\{\s*([a-zA-Z_$][\w$]*)\s*\}\}/g;
 
 export const TextNode = ({ id, data }) => {
-  // TODO: maybe cache the text value somewhere?
-  const [currText, setCurrText] = useState(data?.text || '{{input}}');
+  const [currText, setCurrText] = useState(data?.text ?? '{{input}}');
   const [size, setSize] = useState({ width: 220, height: 80 });
   const [vars, setVars] = useState([]);
   const measurer = useRef(null);
 
-  console.log(data);
+  console.log(data.text);
   
 
   useEffect(() => {

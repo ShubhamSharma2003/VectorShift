@@ -52,7 +52,36 @@ export const PipelineUI = () => {
     } = useStore(selector, shallow);
 
     const getInitNodeData = (nodeID, type) => {
-      let nodeData = { id: nodeID, nodeType: `${type}` };
+      // Initialize with default data based on node type
+      let nodeData = { id: nodeID };
+      
+      // Add type-specific default data
+      switch(type) {
+        case 'customInput':
+          nodeData.inputName = nodeID.replace('customInput-', 'input_');
+          nodeData.inputType = 'Text';
+          break;
+        case 'customOutput':
+          nodeData.outputName = nodeID.replace('customOutput-', 'output_');
+          nodeData.outputType = 'Text';
+          break;
+        case 'text':
+          nodeData.text = '{{input}}';
+          break;
+        case 'math':
+          nodeData.expression = '1+1';
+          break;
+        case 'join':
+          nodeData.separator = ', ';
+          break;
+        case 'filter':
+          nodeData.condition = 'item => true';
+          break;
+        // llm, date, random don't need default data
+        default:
+          break;
+      }
+      
       return nodeData;
     }
 

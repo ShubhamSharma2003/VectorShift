@@ -182,10 +182,9 @@ export const MathNode = ({ id }) => {
 
 ```javascript
 export const InputNode = ({ id, data }) => {
-  // Generate default name from id
-  const defaultName = id.replace('customInput-', 'input_');
-  const [currName, setCurrName] = useState(data?.inputName || defaultName);
-  const [inputType, setInputType] = useState(data?.inputType || 'Text');
+  // Initialize state from data prop or use defaults
+  const [currName, setCurrName] = useState(data?.inputName ?? id.replace('customInput-', 'input_'));
+  const [inputType, setInputType] = useState(data?.inputType ?? 'Text');
 
   // Define handles
   const rightHandles = [{ id: `${id}-value`, type: 'source' }];
@@ -224,7 +223,8 @@ export const InputNode = ({ id, data }) => {
 
 **Key Points:**
 - ✅ Multiple form fields (input + select)
-- ✅ Default value generation
+- ✅ Default values initialized in data prop (see ui.js)
+- ✅ Uses nullish coalescing operator (??) for safer defaults
 - ✅ Source handle for output
 - ✅ Data persistence through props
 
@@ -280,7 +280,7 @@ export const LLMNode = ({ id, data }) => {
 const VAR_RE = /\{\{\s*([a-zA-Z_$][\w$]*)\s*\}\}/g;
 
 export const TextNode = ({ id, data }) => {
-  const [currText, setCurrText] = useState(data?.text || '{{input}}');
+  const [currText, setCurrText] = useState(data?.text ?? '{{input}}');
   const [vars, setVars] = useState([]);
 
   useEffect(() => {
@@ -338,8 +338,8 @@ export const TextNode = ({ id, data }) => {
 **Show code:** `frontend/src/nodes/joinNode.js`
 
 ```javascript
-export const JoinNode = ({ id }) => {
-  const [sep, setSep] = useState(', ');
+export const JoinNode = ({ id, data }) => {
+  const [sep, setSep] = useState(data?.separator ?? ', ');
   
   // Two input handles at different positions
   const leftHandles = [
@@ -376,7 +376,102 @@ export const JoinNode = ({ id }) => {
 
 ---
 
-## 4️⃣ Backend Connection & Pipeline Submission (6-8 minutes)
+## 4️⃣ Node Data Structure & Initialization (3-4 minutes)
+
+### Understanding the Node Structure
+
+"Each node in React Flow has this structure:"
+
+```javascript
+{
+  id: "text-1",              // Unique node ID
+  type: "text",              // Node type (for rendering)
+  position: { x: 0, y: 0 },  // Canvas position
+  data: {                    // Custom node data
+    id: "text-1",
+    text: "{{input}}",       // Type-specific data
+    // ... other properties
+  }
+}
+```
+
+### Data Initialization
+
+**Show code:** `frontend/src/ui.js` - getInitNodeData function
+
+"When a node is created, we initialize it with sensible defaults based on its type:"
+
+```javascript
+const getInitNodeData = (nodeID, type) => {
+  // Initialize with ID
+  let nodeData = { id: nodeID };
+  
+  // Add type-specific default data
+  switch(type) {
+    case 'customInput':
+      nodeData.inputName = nodeID.replace('customInput-', 'input_');
+      nodeData.inputType = 'Text';
+      break;
+    case 'customOutput':
+      nodeData.outputName = nodeID.replace('customOutput-', 'output_');
+      nodeData.outputType = 'Text';
+      break;
+    case 'text':
+      nodeData.text = '{{input}}';
+      break;
+    case 'math':
+      nodeData.expression = '1+1';
+      break;
+    case 'join':
+      nodeData.separator = ', ';
+      break;
+    case 'filter':
+      nodeData.condition = 'item => true';
+      break;
+    // llm, date, random don't need default data
+  }
+  
+  return nodeData;
+}
+```
+
+**Key Points:**
+- ✅ Each node type gets appropriate default values
+- ✅ Prevents undefined data errors
+- ✅ Makes nodes immediately usable when dropped
+- ✅ Backend receives properly structured data
+
+### Frontend-Backend Data Alignment
+
+"The node structure sent to backend:"
+
+```javascript
+// Frontend node structure (React Flow)
+{
+  id: "text-1",
+  type: "text",        // ← Backend uses this "type" field
+  data: {
+    id: "text-1",
+    text: "{{input}}"
+  }
+}
+
+// Backend expects (Pydantic model)
+class Node(BaseModel):
+    id: str
+    type: str          # ← Matches React Flow's "type"
+    data: Dict[str, Any]
+```
+
+**Why This Matters:**
+- ✅ No data transformation needed
+- ✅ Direct JSON serialization
+- ✅ Type safety on both ends
+- ✅ Consistent naming conventions
+
+---
+
+## 5️⃣ Backend Connection & Pipeline Submission (6-8 minutes)
 
 ### The Submit Button
 
@@ -468,7 +563,7 @@ class Pipeline(BaseModel):
 
 ---
 
-## 5️⃣ DAG Validation (5-7 minutes)
+## 6️⃣ DAG Validation (5-7 minutes)
 
 ### What is a DAG?
 "DAG stands for Directed Acyclic Graph. It means:
@@ -566,7 +661,7 @@ A → B → C → A
 
 ---
 
-## 6️⃣ Demo & Testing (5-7 minutes)
+## 7️⃣ Demo & Testing (5-7 minutes)
 
 ### Live Demo Script
 
@@ -610,7 +705,124 @@ A → B → C → A
 
 ---
 
-## 7️⃣ Key Takeaways & Best Practices (2-3 minutes)
+## 8️⃣ Common Issues & Solutions (3-4 minutes)
+
+### Issue 1: Undefined Data Properties
+
+**Problem:**
+```javascript
+// ❌ This can cause issues
+const [text, setText] = useState(data?.text || '{{input}}');
+// If data.text is empty string "", it still uses default!
+```
+
+**Solution:**
+```javascript
+// ✅ Use nullish coalescing operator
+const [text, setText] = useState(data?.text ?? '{{input}}');
+// Only uses default if data.text is null or undefined
+```
+
+**Why This Matters:**
+- `||` treats `""`, `0`, `false` as falsy → wrong defaults
+- `??` only checks for `null`/`undefined` → correct behavior
+
+---
+
+### Issue 2: Property Name Inconsistency
+
+**Problem:**
+```javascript
+// ❌ Frontend uses different property names than backend
+data: { nodeType: "text" }  // Frontend
+class Node:
+    type: str               # Backend expects "type"
+```
+
+**Solution:**
+```javascript
+// ✅ Use React Flow's built-in "type" field
+{
+  id: "text-1",
+  type: "text",    // Backend reads this directly
+  data: { ... }
+}
+```
+
+**Why This Matters:**
+- No data transformation needed
+- Direct serialization to backend
+- Less room for bugs
+
+---
+
+### Issue 3: Uninitialized Node Data
+
+**Problem:**
+```javascript
+// ❌ Node created with empty data
+const newNode = {
+  id: nodeID,
+  type,
+  position,
+  data: {}  // Empty! Nodes will show undefined values
+};
+```
+
+**Solution:**
+```javascript
+// ✅ Initialize with sensible defaults
+const getInitNodeData = (nodeID, type) => {
+  let nodeData = { id: nodeID };
+  
+  switch(type) {
+    case 'text':
+      nodeData.text = '{{input}}';  // Default template
+      break;
+    case 'math':
+      nodeData.expression = '1+1';  // Default expression
+      break;
+  }
+  
+  return nodeData;
+}
+```
+
+**Why This Matters:**
+- Nodes work immediately when dropped
+- No undefined errors in console
+- Better user experience
+
+---
+
+### Issue 4: Missing Data Prop
+
+**Problem:**
+```javascript
+// ❌ Node doesn't accept data prop
+export const MathNode = ({ id }) => {
+  const [expr, setExpr] = useState('1+1');  // Always default!
+  // Can't restore saved state
+}
+```
+
+**Solution:**
+```javascript
+// ✅ Accept and use data prop
+export const MathNode = ({ id, data }) => {
+  const [expr, setExpr] = useState(data?.expression ?? '1+1');
+  // Now it can restore from saved data
+}
+```
+
+**Why This Matters:**
+- Enables data persistence
+- Supports save/load functionality
+- Nodes remember their configuration
+
+---
+
+## 9️⃣ Key Takeaways & Best Practices (2-3 minutes)
 
 ### Architecture Benefits
 
@@ -664,7 +876,7 @@ export const MyNode = ({ id, data }) => {
 
 ---
 
-## 8️⃣ Future Enhancements (1-2 minutes)
+## 🔟 Future Enhancements (1-2 minutes)
 
 ### Potential Features
 
@@ -679,7 +891,7 @@ export const MyNode = ({ id, data }) => {
 
 ---
 
-## 9️⃣ Conclusion & Resources (1 minute)
+## 1️⃣1️⃣ Conclusion & Resources (1 minute)
 
 ### Summary
 "We built a flexible node-based pipeline editor using:
@@ -775,4 +987,4 @@ A: Follow the pattern shown - import BaseNode, configure handles, add custom UI
 
 **End of Script** 🎬
 
-**Total Video Length**: ~35-45 minutes
+**Total Video Length**: ~40-50 minutes

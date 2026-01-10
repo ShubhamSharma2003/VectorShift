@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { BaseNode } from './BaseNode';
 
-export const JoinNode = ({ id }) => {
-  const [sep, setSep] = useState(', ');
+export const JoinNode = ({ id, data }) => {
+  const [sep, setSep] = useState(data?.separator ?? ', ');
   const leftHandles = [{ id: `${id}-a` }, { id: `${id}-b`, top: '50%' }];
   const rightHandles = [{ id: `${id}-joined` }];
 

@@ -2,10 +2,8 @@ import { useState } from 'react';
 import { BaseNode } from './BaseNode';
 
 export const InputNode = ({ id, data }) => {
-  // generate default name from id if not provided
-  const defaultName = id.replace('customInput-', 'input_');
-  const [currName, setCurrName] = useState(data?.inputName || defaultName);
-  const [inputType, setInputType] = useState(data?.inputType || 'Text');
+  const [currName, setCurrName] = useState(data?.inputName ?? id.replace('customInput-', 'input_'));
+  const [inputType, setInputType] = useState(data?.inputType ?? 'Text');
 
   const handleNameChange = (e) => {
     setCurrName(e.target.value);
